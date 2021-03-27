@@ -40,7 +40,7 @@ class PracticeViewer(QtWidgets.QMainWindow, practiceui.Ui_MainWindow):
         right_answer = "<span style=\"color:green;\" >{}</span>"
         answer = str(self.practiceEdit.text()).upper()
         self.practiceEdit.clear()
-        if answer == self.memory_bank:
+        if answer.strip() == self.memory_bank.strip():
             ans1 = right_answer.format(self.memory_bank)
             ans2 = right_answer.format(answer)            
         else:
@@ -135,7 +135,7 @@ class PracticeViewer(QtWidgets.QMainWindow, practiceui.Ui_MainWindow):
         '''Codegroups test'''
         alphanum = alphabet + numbers
         code_group = ""
-        for i in range(3):
+        for i in range(2):
             for i in range(5):
                 code_group += choice(alphanum)
             code_group += " "
