@@ -4,6 +4,8 @@ import toolkitui
 from morsify import MorseUtilities as m
 from random import choice
 
+# This is not going well. I will work on the quiz
+# for a while and come back to this
 
 class SimulatedViewer(QtWidgets.QMainWindow, simulatedui.Ui_MainWindow):
 
@@ -17,10 +19,12 @@ class SimulatedViewer(QtWidgets.QMainWindow, simulatedui.Ui_MainWindow):
         self.simulatedstartButton.clicked.connect(self.contest)
         self.callsignButton.clicked.connect(self.update_call)
         self.simulatedEdit.returnPressed.connect(self.simulated_input_handler)
+        self.showBox.stateChanged.connect(self.repeat_full_qso)
 
         self.qso_state = 0
         self.my_call = ""
         self.qso_call = ""
+        self.full_qso = [" "]
         self.memory_bank = ""
         self.listening = False
         self.remove_list = ["AR", "K", "BK", "FER", "FR"
@@ -68,8 +72,13 @@ class SimulatedViewer(QtWidgets.QMainWindow, simulatedui.Ui_MainWindow):
 
     def repeat_qso(self):
         """Repeats memory bank"""
-        de = self.memory_bank
-        m.make_beep(de)
+        de = self.full_qso
+        m.make_beep(de[-1])
+
+    def repeat_full_qso(self):
+        for i in self.full_qso:
+            print(i)
+        print("~~~~~~~~~~")
 
     def toggle_qsolisten(self):
         """Toggles listen button on Simulated QSP"""
@@ -99,8 +108,10 @@ class SimulatedViewer(QtWidgets.QMainWindow, simulatedui.Ui_MainWindow):
         de = m.callsign()
         self.qso_call = de
         cq_call = f"CQ CQ CQ DE {de} AR K"
-        self.simulatedBrowser.append(cq_call)
+#        self.simulatedBrowser.append(cq_call)
         m.make_beep(cq_call)
+        self.memory_bank = cq_call
+        self.full_qso.append(cq_call)
         self.qso_state = 1
 
     def clean_qsostring(self, qso_string):
@@ -116,23 +127,27 @@ class SimulatedViewer(QtWidgets.QMainWindow, simulatedui.Ui_MainWindow):
         self.my_call = self.callsignLabel.text()
         qso_string = self.simulatedEdit.text().upper()
         clean_words = self.clean_qsostring(qso_string)
+        self.full_qso.append(" ".join(clean_words))
         answer = f"{self.qso_call} DE {self.my_call}"
         if " ".join(clean_words) == answer:
+            self.simulatedBrowser.append(self.memory_bank)
             reply_styled = f"<span style=\"color:green;\" >{qso_string}</span>"
             self.simulatedBrowser.append(reply_styled)
             self.simulatedEdit.clear()
             self.qso_state = 2
             reply_line = f"{self.my_call} DE {self.qso_call} UR 599 K"
-            self.simulatedBrowser.append(reply_line)
+#            self.simulatedBrowser.append(reply_line)
             m.make_beep(reply_line)
+            self.full_qso.append(reply_line)
         elif self.my_call in clean_words:
             self.repeat_qso_call()
         elif self.qso_call in clean_words:
             self.repeat_my_call()
         else:
             error_line = f"SRI {self.qso_call}"
-            self.simulatedBrowser.append(error_line)
             m.make_beep(error_line)
+            self.simulatedBrowser.append("~~End of Call~~\n")
+            self.full_qso.append(error_line)
             self.contest()
 
     def repeat_qso_call(self):
@@ -142,8 +157,9 @@ class SimulatedViewer(QtWidgets.QMainWindow, simulatedui.Ui_MainWindow):
                         f"ZWF {tx_call} {tx_call} CFM?",
                         f"ZWF {tx_call} K"]
         rpt = choice(repeat_calls)
-        self.simulatedBrowser.append(rpt)
+#        self.simulatedBrowser.append(rpt)
         m.make_beep(rpt)
+        self.full_qso.append(rpt)
 
     def repeat_my_call(self):
         tx_call = self.qso_call
@@ -152,15 +168,17 @@ class SimulatedViewer(QtWidgets.QMainWindow, simulatedui.Ui_MainWindow):
                         f"{tx_call} SRI PSE RPT? K",
                         f"{tx_call} PSE RPT QRZ"]
         rpt = choice(repeat_calls)
-        self.simulatedBrowser.append(rpt)
+#        self.simulatedBrowser.append(rpt)
         m.make_beep(rpt)
+        self.full_qso.append(rpt)
 
     def request_rst(self):
         tx_call = self.qso_call
         rx_call = self.my_call
         rpt = f"{rx_call} de {tx_call} RST?"
-        self.simulatedBrowser.append(rpt)
+#        self.simulatedBrowser.append(rpt)
         m.make_beep(rpt)
+        self.full_qso.append(rpt)
 
     def called_cq(self):
         '''Function where enter pressed on cq tab not in listen mode'''

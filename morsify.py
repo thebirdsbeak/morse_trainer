@@ -8,6 +8,8 @@ alphabet = ["A", "B", "C", "D", "E", "F", "G", "H",
 numbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
 prefixes =["M2", "M6", "2M0", "G1", "G2", "G3",
            "G4", "G5", "G6", "G7", "M1", "M3", "M0"]
+punctuation = [".", ",", "?", "="]
+
 
 class MorseUtilities():
 

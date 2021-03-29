@@ -42,12 +42,27 @@
         </item>
         <item>
          <property name="text">
+          <string>AlphaNumPun</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
           <string>Codegroups</string>
          </property>
         </item>
         <item>
          <property name="text">
           <string>Callsigns</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Numbers</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Punctuation</string>
          </property>
         </item>
         <item>
@@ -91,7 +106,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>22</height>
+     <height>20</height>
     </rect>
    </property>
   </widget>

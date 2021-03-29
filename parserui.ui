@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>601</width>
-    <height>540</height>
+    <height>574</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -18,12 +18,66 @@
     <item row="0" column="0">
      <layout class="QGridLayout" name="gridLayout">
       <item row="0" column="0">
-       <widget class="QTextBrowser" name="parserBrowser"/>
+       <widget class="QGraphicsView" name="graphicsView"/>
+      </item>
+      <item row="1" column="0">
+       <layout class="QHBoxLayout" name="horizontalLayout_2">
+        <item>
+         <widget class="QComboBox" name="diffCheck">
+          <item>
+           <property name="text">
+            <string>Easy</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Medium</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Hard</string>
+           </property>
+          </item>
+         </widget>
+        </item>
+        <item>
+         <widget class="QComboBox" name="parserwpmBox">
+          <item>
+           <property name="text">
+            <string>20 WPM</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>10 WPM</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>15 WPM</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>25 WPM</string>
+           </property>
+          </item>
+         </widget>
+        </item>
+       </layout>
       </item>
      </layout>
     </item>
     <item row="1" column="0">
      <layout class="QGridLayout" name="gridLayout_3">
+      <item row="3" column="5">
+       <widget class="QPushButton" name="parserrestartButton">
+        <property name="text">
+         <string>Restart</string>
+        </property>
+       </widget>
+      </item>
       <item row="2" column="0">
        <widget class="QLabel" name="label">
         <property name="text">
@@ -31,10 +85,10 @@
         </property>
        </widget>
       </item>
-      <item row="4" column="0">
-       <widget class="QLabel" name="label_2">
+      <item row="1" column="0">
+       <widget class="QLabel" name="label_3">
         <property name="text">
-         <string>Answer:</string>
+         <string>Callsign:</string>
         </property>
        </widget>
       </item>
@@ -45,11 +99,15 @@
         </property>
        </widget>
       </item>
-      <item row="1" column="2">
-       <widget class="QLineEdit" name="callEdit"/>
+      <item row="4" column="5">
+       <widget class="QPushButton" name="parserenterButton">
+        <property name="text">
+         <string>Enter</string>
+        </property>
+       </widget>
       </item>
-      <item row="2" column="2">
-       <widget class="QLineEdit" name="rstEdit"/>
+      <item row="3" column="2">
+       <widget class="QLineEdit" name="nameEdit"/>
       </item>
       <item row="3" column="0">
        <widget class="QLabel" name="label_4">
@@ -57,12 +115,18 @@
          <enum>Qt::LeftToRight</enum>
         </property>
         <property name="text">
-         <string>Question:</string>
+         <string>Name</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
         </property>
        </widget>
+      </item>
+      <item row="4" column="2">
+       <widget class="QLineEdit" name="qthEdit"/>
+      </item>
+      <item row="1" column="2">
+       <widget class="QLineEdit" name="callEdit"/>
       </item>
       <item row="1" column="5">
        <widget class="QPushButton" name="parserstartButton">
@@ -71,39 +135,15 @@
         </property>
        </widget>
       </item>
-      <item row="4" column="2">
-       <widget class="QLineEdit" name="answerEdit"/>
-      </item>
-      <item row="1" column="0">
-       <widget class="QLabel" name="label_3">
+      <item row="4" column="0">
+       <widget class="QLabel" name="label_2">
         <property name="text">
-         <string>Callsign:</string>
+         <string>QTH</string>
         </property>
        </widget>
       </item>
-      <item row="3" column="2">
-       <widget class="QLabel" name="label_5">
-        <property name="text">
-         <string>Question will appear here</string>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="5">
-       <widget class="QPushButton" name="parserrestartButton">
-        <property name="text">
-         <string>Restart</string>
-        </property>
-       </widget>
-      </item>
-      <item row="4" column="5">
-       <widget class="QLabel" name="scoreLabel">
-        <property name="text">
-         <string>0 / 10</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignCenter</set>
-        </property>
-       </widget>
+      <item row="2" column="2">
+       <widget class="QLineEdit" name="rstEdit"/>
       </item>
      </layout>
     </item>
@@ -115,7 +155,7 @@
      <x>0</x>
      <y>0</y>
      <width>601</width>
-     <height>22</height>
+     <height>20</height>
     </rect>
    </property>
   </widget>

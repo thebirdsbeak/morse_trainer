@@ -4,8 +4,11 @@ import toolkitui
 from random import choice
 from playsound import playsound
 from morsify import MorseUtilities as m
-from morsify import alphabet, numbers
+from morsify import alphabet, numbers, punctuation
 from words import random_word
+
+# TODO
+# test len for auto inputting of words and codegroups?
 
 
 class PracticeViewer(QtWidgets.QMainWindow, practiceui.Ui_MainWindow):
@@ -62,6 +65,12 @@ class PracticeViewer(QtWidgets.QMainWindow, practiceui.Ui_MainWindow):
                 self.letters()
             elif self.selectionBox.currentText() == "Codegroups":
                 self.codegroups()
+            elif self.selectionBox.currentText() == "Punctuation":
+                self.punctuations()
+            elif self.selectionBox.currentText() == "Numbers":
+                self.number()
+            elif self.selectionBox.currentText() == "AlphaNumPun":
+                self.alphanumpun()
         else:
             return
 
@@ -82,7 +91,7 @@ class PracticeViewer(QtWidgets.QMainWindow, practiceui.Ui_MainWindow):
 
     def edit_handler(self):
         '''If edited, does a thing'''
-        if self.selectionBox.currentText() == "Alphabet":
+        if self.selectionBox.currentText() == "Alphabet" or "Punctuation" or "AlphanumPun":
             if self.listening is True:
                 self.check_input()
             else:
@@ -101,6 +110,12 @@ class PracticeViewer(QtWidgets.QMainWindow, practiceui.Ui_MainWindow):
                 self.letters()
             elif self.selectionBox.currentText() == "Codegroups":
                 self.codegroups()
+            elif self.selectionBox.currentText() == "Punctuation":
+                self.punctuations()
+            elif self.selectionBox.currentText() == "Numbers":
+                self.number()
+            elif self.selectionBox.currentText() == "AlphaNumPun":
+                self.alphanumpun()
         else:
             self.listening = False
             self.practicestartButton.setStyleSheet("Background-color: none")
@@ -141,6 +156,25 @@ class PracticeViewer(QtWidgets.QMainWindow, practiceui.Ui_MainWindow):
             code_group += " "
         self.memory_bank = code_group
         m.make_beep(code_group)
+
+    def punctuations(self):
+        '''Punctuation test'''
+        mark = choice(punctuation)
+        self.memory_bank = mark
+        m.make_beep(mark)
+
+    def number(self):
+        '''Numbers test'''
+        num = choice(numbers)
+        self.memory_bank = num
+        m.make_beep(num)
+
+    def alphanumpun(self):
+        '''Alpha, numbers, and punctuation test'''
+        alphanump = alphabet + numbers + punctuation
+        selection = choice(alphanump)
+        self.memory_bank = selection
+        m.make_beep(selection)
 
     def parrot(self):
         '''Takes letter and emits it back in morse'''
