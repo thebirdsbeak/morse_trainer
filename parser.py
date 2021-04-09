@@ -22,6 +22,7 @@ class ParserViewer(QtWidgets.QMainWindow, parserui.Ui_MainWindow):
         self.parserstartButton.clicked.connect(self.quizhandler)
         self.parserrepeatButton.clicked.connect(self.repeat_question)
         self.parserenterButton.clicked.connect(self.validate_entry)
+        self.listening = False
 
         #Call Variables
         self.qsocall = ""
@@ -29,17 +30,23 @@ class ParserViewer(QtWidgets.QMainWindow, parserui.Ui_MainWindow):
         self.qth = ""
         self.name = ""
         self.question = ""
-
+        
     def quizhandler(self):
-        self.quiz_callsign()
-        self.quiz_rst()
-        self.quiz_qth()
-        self.quiz_name()
-        self.line_template()
-        print("~~~~~")
-        print(self.question)
-        print("~~~~~")
-        m.make_beep(self.question)
+        if self.listening == False:
+            self.listening = True
+            self.parserstartButton.setStyleSheet("Background-color: green")
+            self.quiz_callsign()
+            self.quiz_rst()
+            self.quiz_qth()
+            self.quiz_name()
+            self.line_template()
+            print("~~~~~")
+            print(self.question)
+            print("~~~~~")
+            m.make_beep(self.question)
+        else:
+            self.parserstartButton.setStyleSheet("Background-color: none")
+            self.listening == False
 
     def quiz_callsign(self):
         de = m.callsign()
@@ -93,7 +100,22 @@ class ParserViewer(QtWidgets.QMainWindow, parserui.Ui_MainWindow):
         n = self.name
         q = self.qth
         r = self.rst
-        t = f"2M0KRG DE {c} UR {r} = TNX FER CALL = NAME IS {n}, QTH IS {q} = QTH? DE {c} K"
+        if self.diffCheck.currentText() == "Easy":
+            cs = f"{c} {c} {c}"
+            ns = f"{n} {n} {n}"
+            qs = f"{q} {q} {q}"
+            rs = f"{r} {r} {r}"
+        elif self.diffCheck.currentText() == "Medium":
+            cs = f"{c} {c}"
+            ns = f"{n} {n}"
+            qs = f"{q} {q}"
+            rs = f"{r} {r}"
+        elif self.diffCheck.currentText() == "Hard":
+            cs = c
+            ns = n
+            qs = q
+            rs = r
+        t = f"2M0KRG DE {cs} UR {rs} = TNX FER CALL = NAME IS {ns}, QTH IS {qs} = QTH? DE {c} K"
         self.question = t
         
     def keyPressEvent(self, e):

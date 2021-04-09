@@ -161,6 +161,19 @@
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
+ <tabstops>
+  <tabstop>diffCheck</tabstop>
+  <tabstop>parserwpmBox</tabstop>
+  <tabstop>parserstartButton</tabstop>
+  <tabstop>parserrepeatButton</tabstop>
+  <tabstop>parserrestartButton</tabstop>
+  <tabstop>callEdit</tabstop>
+  <tabstop>rstEdit</tabstop>
+  <tabstop>nameEdit</tabstop>
+  <tabstop>qthEdit</tabstop>
+  <tabstop>parserenterButton</tabstop>
+  <tabstop>graphicsView</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

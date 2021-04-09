@@ -91,11 +91,16 @@ class PracticeViewer(QtWidgets.QMainWindow, practiceui.Ui_MainWindow):
 
     def edit_handler(self):
         '''If edited, does a thing'''
-        if self.selectionBox.currentText() == "Alphabet" or "Punctuation" or "AlphanumPun":
-            if self.listening is True:
-                self.check_input()
-            else:
-                self.parrot()
+        no_enter_key = ["Alphabet",
+                        "AlphaNumPun",
+                        "Numbers",
+                        "Punctuation"]
+        for i in no_enter_key:
+            if self.selectionBox.currentText() == i:
+                if self.listening is True:
+                    self.check_input()
+                else:
+                    self.parrot()
 
     def toggle_listen(self):
         if self.listening is False:

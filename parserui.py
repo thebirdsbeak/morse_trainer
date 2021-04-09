@@ -93,6 +93,16 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
+        MainWindow.setTabOrder(self.diffCheck, self.parserwpmBox)
+        MainWindow.setTabOrder(self.parserwpmBox, self.parserstartButton)
+        MainWindow.setTabOrder(self.parserstartButton, self.parserrepeatButton)
+        MainWindow.setTabOrder(self.parserrepeatButton, self.parserrestartButton)
+        MainWindow.setTabOrder(self.parserrestartButton, self.callEdit)
+        MainWindow.setTabOrder(self.callEdit, self.rstEdit)
+        MainWindow.setTabOrder(self.rstEdit, self.nameEdit)
+        MainWindow.setTabOrder(self.nameEdit, self.qthEdit)
+        MainWindow.setTabOrder(self.qthEdit, self.parserenterButton)
+        MainWindow.setTabOrder(self.parserenterButton, self.graphicsView)
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
